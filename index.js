@@ -38,10 +38,10 @@ new Promise((resolve, reject) => {
                     let dependency = line
                         .substring(0, line.indexOf("->") - 1)
                         .replace(/"/g, "");
-                    dependencies.add(dependency.trim());
                     let dependency_tree = line
                         .substring(line.indexOf("->") + 2, line.length - 2)
                         .replace(/"/g, "");
+                    dependencies.add(dependency.trim());
                     tree_dependencies.add(dependency_tree.trim());
                 }
                 if (line.length <= 3)
@@ -49,11 +49,11 @@ new Promise((resolve, reject) => {
             });
         })
             .then((result) => {
-                console.log("DEP", result[0]);
-                console.log("DEP_TREE", result[1]);
                 let data_to_process = {
                     dependencies: [...result[0]],
-                    tree_dependencies: [...result[1]],
+                    tree_dependencies: [...result[1]].filter((value) => {
+                        return !result[0].has(value);
+                    }),
                 };
                 fs.writeFile(
                     "data_to_process.json",
@@ -62,6 +62,7 @@ new Promise((resolve, reject) => {
                         if (err) console.log(err);
                     }
                 );
+                console.log("Saved to data_to_process.json");
             })
             .catch((err) => console.log(err));
     })
