@@ -4,9 +4,10 @@ import { Container, Row, Col } from "shards-react";
 
 import PageTitle from "./../components/common/PageTitle";
 import SmallStats from "./../components/common/SmallStats";
-import UsersOverview from "./../components/blog/UsersOverview";
-import Discussions from "./../components/blog/Discussions";
-import TopReferrals from "./../components/common/TopReferrals";
+import UpdateFreqChart from "../components/blog/UpdateFreqChart";
+import VersionCompatibility from "../components/blog/VersionCompatibility";
+import DependenciesGrades from "../components/common/DependenciesGrades";
+import Slider from "react-slick";
 
 const BlogOverview = ({ smallStats }) => (
     <Container fluid className="main-content-container px-4">
@@ -30,27 +31,81 @@ const BlogOverview = ({ smallStats }) => (
                         chartLabels={stats.chartLabels}
                         label={stats.label}
                         value={stats.value}
-                        percentage={stats.percentage}
-                        increase={stats.increase}
-                        decrease={stats.decrease}
                     />
                 </Col>
             ))}
         </Row>
 
         <Row>
-            {/* Users Overview */}
+            {/* Update frequency chart */}
             <Col lg="8" md="12" sm="12" className="mb-4">
-                <UsersOverview />
+                <Slider>
+                    <UpdateFreqChart
+                        title="costam.456"
+                        chartData={{
+                            labels: Array.from(new Array(30), (_, i) =>
+                                i === 0 ? 1 : i
+                            ),
+                            datasets: [
+                                {
+                                    label: "Number of updates",
+                                    fill: "start",
+                                    data: [
+                                        500, 800, 320, 180, 240, 320, 230, 650,
+                                        590, 1200, 750, 940, 1420, 1200, 960,
+                                        1450, 1820, 2800, 2102, 1920, 3920,
+                                        3202, 3140, 2800, 3200, 3200, 3400,
+                                        2910, 3100, 4250,
+                                    ],
+                                    backgroundColor: "rgba(0,123,255,0.1)",
+                                    borderColor: "rgba(0,123,255,1)",
+                                    pointBackgroundColor: "#ffffff",
+                                    pointHoverBackgroundColor: "rgb(0,123,255)",
+                                    borderWidth: 1.5,
+                                    pointRadius: 0,
+                                    pointHoverRadius: 3,
+                                },
+                            ],
+                        }}
+                    />
+                    <UpdateFreqChart
+                        title={"jakis.123"}
+                        chartData={{
+                            labels: Array.from(new Array(30), (_, i) =>
+                                i === 0 ? 1 : i
+                            ),
+                            datasets: [
+                                {
+                                    label: "Number of updates",
+                                    fill: "start",
+                                    data: [
+                                        900, 1000, 320, 580, 740, 820, 530, 150,
+                                        620, 1200, 750, 940, 1420, 1200, 960,
+                                        150, 150, 2800, 2102, 1920, 3920, 5202,
+                                        3140, 2500, 3200, 3200, 3400, 2910,
+                                        3100, 4250,
+                                    ],
+                                    backgroundColor: "rgba(0,123,255,0.1)",
+                                    borderColor: "rgba(0,123,255,1)",
+                                    pointBackgroundColor: "#ffffff",
+                                    pointHoverBackgroundColor: "rgb(0,123,255)",
+                                    borderWidth: 1.5,
+                                    pointRadius: 0,
+                                    pointHoverRadius: 3,
+                                },
+                            ],
+                        }}
+                    />
+                </Slider>
             </Col>
-            {/* Top Referrals */}
+            {/* Worst graded dependencies */}
             <Col lg="3" md="12" sm="12" className="mb-4">
-                <TopReferrals />
+                <DependenciesGrades />
             </Col>
 
             {/* Discussions */}
             <Col lg="5" md="12" sm="12" className="mb-4">
-                <Discussions />
+                <VersionCompatibility />
             </Col>
         </Row>
     </Container>

@@ -9,7 +9,6 @@ import {
     CardFooter,
     Row,
     Col,
-    FormSelect,
 } from "shards-react";
 
 const TopReferrals = ({ title, referralData }) => (
@@ -58,7 +57,7 @@ TopReferrals.propTypes = {
 };
 
 TopReferrals.defaultProps = {
-    title: "Best graded dependencies",
+    title: "Worst graded dependencies",
     referralData: [
         {
             title: "org.cos.tam",

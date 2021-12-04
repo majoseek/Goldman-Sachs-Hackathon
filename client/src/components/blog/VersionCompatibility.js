@@ -1,17 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    ButtonGroup,
-    Button,
-    Row,
-    Col,
-} from "shards-react";
+import { Card, CardHeader, CardBody, CardFooter } from "shards-react";
 
-const Discussions = ({ title, discussions }) => (
+const VersionCompatibility = ({ title, discussions }) => (
     <Card small className="blog-comments">
         <CardHeader className="border-bottom">
             <h6 className="m-0">{title}</h6>
@@ -42,7 +33,7 @@ const Discussions = ({ title, discussions }) => (
     </Card>
 );
 
-Discussions.propTypes = {
+VersionCompatibility.propTypes = {
     /**
      * The component's title.
      */
@@ -53,7 +44,7 @@ Discussions.propTypes = {
     discussions: PropTypes.array,
 };
 
-Discussions.defaultProps = {
+VersionCompatibility.defaultProps = {
     title: "Version compatibility",
     discussions: [
         {
@@ -98,4 +89,4 @@ Discussions.defaultProps = {
     ],
 };
 
-export default Discussions;
+export default VersionCompatibility;
