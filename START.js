@@ -89,7 +89,7 @@ app.post("/grades", (req, res) => {
                                 //run python script (generates output.json)
                                 const { spawn } = require("child_process");
                                 const bat = spawn("python", [
-                                    "./data_processing/cos.py",
+                                    "./data_processing/main.py",
                                 ]);
 
                                 bat.on("exit", (code) => {
