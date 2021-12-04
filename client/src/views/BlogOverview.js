@@ -39,7 +39,7 @@ const BlogOverview = ({ smallStats }) => (
         <Row>
             {/* Update frequency chart */}
             <Col lg="8" md="12" sm="12" className="mb-4">
-                <Slider>
+                <Slider dots={true} slidesToScroll={1} slidesToShow={1}>
                     <UpdateFreqChart
                         title="costam.456"
                         chartData={{
