@@ -3,15 +3,22 @@ import time
 
 WEIGHT_LAST_UPDATE = 0.1
 WEIGHT_VERSION_COUNT = 0.1
+WEIGHTS_SUM = WEIGHT_LAST_UPDATE + WEIGHT_VERSION_COUNT
 # WEIGHT_LAST_FREQUENCY = 0.1
 
 def grade_dependency(dependency) -> float:
-    grade = sum([
-        grade_last_update(dependency) * WEIGHT_LAST_UPDATE,
-        grade_version_count(dependency) * WEIGHT_VERSION_COUNT
-    ])
+    last_update_grade = grade_last_update(dependency) * WEIGHT_LAST_UPDATE,
+    version_count_grade = grade_version_count(dependency) * WEIGHT_VERSION_COUNT
+    overall_grade = sum([
+        last_update_grade,
+        version_count_grade
+    ]) / WEIGHTS_SUM
 
-    return grade
+    return {
+        "overall_grade": overall_grade,
+        "last_update_grade": last_update_grade,
+        "version_count_grade": version_count_grade
+    }
 
 def grade_last_update(dependency) -> float:
     timestamp = dependency.timestamp
