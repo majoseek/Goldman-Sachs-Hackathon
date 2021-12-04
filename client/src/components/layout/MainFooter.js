@@ -32,7 +32,7 @@ MainFooter.propTypes = {
 
 MainFooter.defaultProps = {
     contained: false,
-    copyright: "HackeRank",
+    copyright: "SecuRank",
 };
 
 export default MainFooter;

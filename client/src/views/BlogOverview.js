@@ -43,15 +43,14 @@ const BlogOverview = ({ smallStats }) => (
             <Col lg="8" md="12" sm="12" className="mb-4">
                 <UsersOverview />
             </Col>
+            {/* Top Referrals */}
+            <Col lg="3" md="12" sm="12" className="mb-4">
+                <TopReferrals />
+            </Col>
 
             {/* Discussions */}
             <Col lg="5" md="12" sm="12" className="mb-4">
                 <Discussions />
-            </Col>
-
-            {/* Top Referrals */}
-            <Col lg="3" md="12" sm="12" className="mb-4">
-                <TopReferrals />
             </Col>
         </Row>
     </Container>
