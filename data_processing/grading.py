@@ -7,11 +7,11 @@ WEIGHTS_SUM = WEIGHT_LAST_UPDATE + WEIGHT_VERSION_COUNT
 # WEIGHT_LAST_FREQUENCY = 0.1
 
 def grade_dependency(dependency) -> float:
-    last_update_grade = grade_last_update(dependency) * WEIGHT_LAST_UPDATE,
-    version_count_grade = grade_version_count(dependency) * WEIGHT_VERSION_COUNT
+    last_update_grade = grade_last_update(dependency)
+    version_count_grade = grade_version_count(dependency) 
     overall_grade = sum([
-        last_update_grade,
-        version_count_grade
+        last_update_grade * WEIGHT_LAST_UPDATE,
+        version_count_grade * WEIGHT_VERSION_COUNT
     ]) / WEIGHTS_SUM
 
     return {
