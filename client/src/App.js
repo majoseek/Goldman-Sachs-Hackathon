@@ -31,6 +31,7 @@ function App() {
                     project_location: project_location,
                 })
                 .then((response) => {
+                    console.log(response)
                     const obj_dep = JSON.parse(response.data.dataString);
                     for (var key in obj_dep) {
                         if (obj_dep.hasOwnProperty(key)) {
@@ -60,6 +61,7 @@ function App() {
                                 ...dep_grades,
                                 new_elem,
                             ]);
+                            console.log(dep_grades);
                         }
                     }
                     const obj = JSON.parse(response.data.jsonString);

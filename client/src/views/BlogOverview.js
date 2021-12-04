@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
 
 import PageTitle from "./../components/PageTitle";
@@ -47,6 +46,7 @@ function BlogOverview(props) {
                                 <UpdateFreqChart
                                     key={data.title}
                                     chartData={data}
+                                    title={data.title}
                                 />
                             );
                         })}
@@ -54,7 +54,7 @@ function BlogOverview(props) {
                 </Col>
                 {/* Worst graded dependencies */}
                 <Col lg="3" md="12" sm="12" className="mb-4">
-                    <DependenciesGrades />
+                    <DependenciesGrades chartData={props.data_chart} />
                 </Col>
 
                 {/* Discussions */}

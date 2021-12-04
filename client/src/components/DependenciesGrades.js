@@ -14,7 +14,7 @@ import {
 const TopReferrals = ({ title, referralData }) => (
     <Card small>
         <CardHeader className="border-bottom">
-            <h6 className="m-0">{title}</h6>
+            <h6 className="m-0">Worst graded dependencies</h6>
             <div className="block-handle" />
         </CardHeader>
 
@@ -88,7 +88,7 @@ TopReferrals.defaultProps = {
             value: "1",
         },
         {
-            title: "opentest4j",
+            title: "rest-assured",
             value: "1",
         },
     ],

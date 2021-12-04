@@ -51,7 +51,6 @@ def grade_project(project_dependencies) -> dict:
         dependecy_name = list(dependency_grade.keys())[0]
         dictionary['dependencies_grades'][dependecy_name] = dependency_grade
 
-    print(dictionary)
     return dictionary
 
 
@@ -116,10 +115,10 @@ def grade_version_count(dependency) -> float:
 def grade_updates_frequency(dependency) -> float:
     c = 6  # parameter describing 
 
-    if dependency.version < 49:
-        grade_function = 6*c + 3
-    elif dependency.grade_version_count > 50 and dependency.grade_version_count < 99:
-        grade_function = 2*c + 25
+    if dependency.version_count < 22:
+        grade_function = 6*c + 2
+    elif dependency.version_count > 50 and dependency.version_count < 99:
+        grade_function = 2*c + 26
     else:
         grade_function = c + 10
 

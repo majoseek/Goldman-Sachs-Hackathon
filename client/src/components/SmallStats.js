@@ -121,7 +121,9 @@ class SmallStats extends React.Component {
                     <div className={innerWrapperClasses}>
                         <div className={dataFieldClasses}>
                             <span className={labelClasses}>{label}</span>
-                            <h6 className={valueClasses}>{value}</h6>
+                            <h6 className={valueClasses}>
+                                {Math.round(value * 100) / 100}
+                            </h6>
                         </div>
                     </div>
                     <canvas

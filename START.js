@@ -100,13 +100,13 @@ app.post("/grades", (req, res) => {
                                     console.log(result);
                                     //python script generated output.json
                                     fs.readFile(
-                                        "./data_processing/output.json",
+                                        "./output.json",
                                         "utf8",
                                         (err, jsonString) => {
                                             if (err) res.send(err);
                                             else {
                                                 fs.readFile(
-                                                    "./data_processing/data.json",
+                                                    "./data.json",
                                                     "utf8",
                                                     (err, dataString) => {
                                                         if (err) res.send(err);
