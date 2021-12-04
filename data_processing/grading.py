@@ -10,41 +10,48 @@ WEIGHTS_SUM = (
     # WEIGHT_VERSION_COUNT
 )
 
-GRADES_NAMES = ['overall_grade', 'last_update_grade', 'version_count_grade']
+GRADES_NAMES = ['overall_grade', 'last_update_grade', 'updates_frequency_grade']
 # WEIGHT_LAST_FREQUENCY = 0.1
 
 
 def grade_project(project_dependencies) -> dict:
     dependencies_grades = [
-        grade_dependency(dependency)["overall_grade"] for dependency
+        grade_dependency(dependency) for dependency
         in project_dependencies.dependencies
     ]
 
     deps_number = len(dependencies_grades)
 
+    # dictionary = {
+    #     'project_grade': {
+    #         'overall_grade': None,
+    #         'last_update_grade': None,
+    #         'updates_frequency_grade': None
+    #     },
+    #     'dependencies_grades': {}
+    # }
+
     dictionary = {
-        'project_grade': {
-            'overall_grade': None,
-            'last_update_grade': None,
-            'vesion_count_grade': None
-        },
+        'project_grade': {},
         'dependencies_grades': {}
     }
 
     # filling dictionary['project_grade']
     for grade_name in GRADES_NAMES:
-        dictionary['project_grade'][grade_name] = sum(
+        sum_val = sum(
             [
-                dependency_grade[grade_name] for dependency_grade
+                dependency_grade[list(dependency_grade.keys())[0]][grade_name] for dependency_grade
                 in dependencies_grades
             ]
         ) / deps_number
+        dictionary['project_grade'][grade_name] = sum_val
 
     # filling dependencies_dictionary
     for dependency_grade in dependencies_grades:
-        dependecy_name = dependency_grade.keys()[0]
+        dependecy_name = list(dependency_grade.keys())[0]
         dictionary['dependencies_grades'][dependecy_name] = dependency_grade
 
+    print(dictionary)
     return dictionary
 
 
@@ -107,26 +114,16 @@ def grade_version_count(dependency) -> float:
 
 
 def grade_updates_frequency(dependency) -> float:
-    c = 100
-    timestamps = dependency.timestamps
+    c = 6  # parameter describing 
 
-    diffs = []
+    if dependency.version < 49:
+        grade_function = 6*c + 3
+    elif dependency.grade_version_count > 50 and dependency.grade_version_count < 99:
+        grade_function = 2*c + 25
+    else:
+        grade_function = c + 10
 
-    n = len(timestamps)
-
-    for i in range(n - 1):
-        diffs.append(
-            timestamps[i+1] - timestamps[i]
-        )
-
-    grade = 0
-
-    for i in range(n - 1):
-        grade += i / (1 + max(diffs[i] - c, 0))
-
-    grade *= 2 / (n * (n - 1))
-
-    return grade
+    return grade_function
 
 
 # def grade_updates_frequency(dependency) -> float:
