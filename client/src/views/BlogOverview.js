@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col } from "shards-react";
 
-import PageTitle from "./../components/common/PageTitle";
-import SmallStats from "./../components/common/SmallStats";
-import UpdateFreqChart from "../components/blog/UpdateFreqChart";
-import VersionCompatibility from "../components/blog/VersionCompatibility";
-import DependenciesGrades from "../components/common/DependenciesGrades";
+import PageTitle from "./../components/PageTitle";
+import SmallStats from "./../components/SmallStats";
+import UpdateFreqChart from "../components/UpdateFreqChart";
+import VersionCompatibility from "../components/VersionCompatibility";
+import DependenciesGrades from "../components/DependenciesGrades";
 import Slider from "react-slick";
 
 const BlogOverview = ({ smallStats }) => (
@@ -43,19 +43,14 @@ const BlogOverview = ({ smallStats }) => (
                     <UpdateFreqChart
                         title="costam.456"
                         chartData={{
-                            labels: Array.from(new Array(30), (_, i) =>
-                                i === 0 ? 1 : i
-                            ),
+                            labels: Array.from(new Array(12), (_, i) => i + 1),
                             datasets: [
                                 {
                                     label: "Number of updates",
                                     fill: "start",
                                     data: [
                                         500, 800, 320, 180, 240, 320, 230, 650,
-                                        590, 1200, 750, 940, 1420, 1200, 960,
-                                        1450, 1820, 2800, 2102, 1920, 3920,
-                                        3202, 3140, 2800, 3200, 3200, 3400,
-                                        2910, 3100, 4250,
+                                        590, 1200, 750, 940,
                                     ],
                                     backgroundColor: "rgba(0,123,255,0.1)",
                                     borderColor: "rgba(0,123,255,1)",

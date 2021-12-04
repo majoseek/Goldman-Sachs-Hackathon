@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Card, CardHeader, CardBody } from "shards-react";
 
-import Chart from "../../utils/chart";
+import Chart from "../utils/chart";
 
 class UsersOverview extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class UsersOverview extends React.Component {
                             ticks: {
                                 callback(tick, index) {
                                     // Jump every 7 values on the X axis labels to avoid clutter.
-                                    return index % 7 !== 0 ? "" : tick;
+                                    return index % 1 !== 0 ? "" : tick;
                                 },
                             },
                         },
@@ -70,7 +70,7 @@ class UsersOverview extends React.Component {
         };
 
         const BlogUsersOverview = new Chart(this.canvasRef.current, {
-            type: "LineWithLine",
+            type: "bar",
             data: this.props.chartData,
             options: chartOptions,
         });
@@ -87,7 +87,6 @@ class UsersOverview extends React.Component {
     }
 
     render() {
-        const { title } = "COS";
         return (
             <Card small className="h-100">
                 <CardHeader className="border-bottom">
