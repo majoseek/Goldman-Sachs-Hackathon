@@ -5,7 +5,7 @@ WEIGHT_LAST_UPDATE = 0.1
 WEIGHT_VERSION_COUNT = 0.1
 # WEIGHT_LAST_FREQUENCY = 0.1
 
-def grade_dependency(dependecny) -> float:
+def grade_dependency(dependency) -> float:
     grade = sum([
         grade_last_update(dependency) * WEIGHT_LAST_UPDATE,
         grade_version_count(dependency) * WEIGHT_VERSION_COUNT
@@ -49,6 +49,7 @@ def grade_version_count(dependency) -> float:
         grade = 1 - (mean_period) / max_period
 
     return grade
+
 # def grade_update_frequency(dependency) -> float:
 #     version_count = dependency.version_count
     
