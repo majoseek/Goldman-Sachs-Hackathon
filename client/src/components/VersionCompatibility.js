@@ -16,13 +16,13 @@ const VersionCompatibility = ({ title, discussions }) => (
                         {/* Content :: Title */}
                         <div className="blog-comments__meta text-mutes">
                             <span className="text-mutes">
-                                groupid.artifactid : current_version
+                                boot-starter-tomcat : 2.5.0
                             </span>
                         </div>
 
                         {/* Content :: Body */}
                         <p className="m-0 my-1 mb-2 text-muted">
-                            Latest version : version
+                            Latest version : 2.5.4 !
                         </p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ VersionCompatibility.propTypes = {
 };
 
 VersionCompatibility.defaultProps = {
-    title: "Version compatibility",
+    title: "Wrong version compatibility",
     discussions: [
         {
             id: 1,
@@ -59,32 +59,6 @@ VersionCompatibility.defaultProps = {
                 url: "#",
             },
             body: "Well, the way they make shows is, they make one show ...",
-        },
-        {
-            id: 2,
-            date: "4 days ago",
-            author: {
-                name: "John Doe",
-                url: "#",
-            },
-            post: {
-                title: "Hello World!",
-                url: "#",
-            },
-            body: "After the avalanche, it took us a week to climb out. Now...",
-        },
-        {
-            id: 3,
-            date: "5 days ago",
-            author: {
-                name: "John Doe",
-                url: "#",
-            },
-            post: {
-                title: "Hello World!",
-                url: "#",
-            },
-            body: "My money's in that office, right? If she start giving me...",
         },
     ],
 };

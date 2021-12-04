@@ -16,7 +16,7 @@ function BlogOverview(props) {
             <Row noGutters className="page-header py-4">
                 <PageTitle
                     title="Project overview"
-                    subtitle="Dashboard"
+                    subtitle="SecuRank"
                     className="text-sm-left mb-3"
                 />
             </Row>
@@ -26,6 +26,7 @@ function BlogOverview(props) {
                 {props.smallStats.map((stats, idx) => (
                     <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
                         <SmallStats
+                            key={`small-stats-${idx}`}
                             id={`small-stats-${idx}`}
                             variation="1"
                             chartData={stats.datasets}
@@ -44,7 +45,7 @@ function BlogOverview(props) {
                         {props.data_chart.map((data) => {
                             return (
                                 <UpdateFreqChart
-                                    title="costam.456"
+                                    key={data.title}
                                     chartData={data}
                                 />
                             );

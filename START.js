@@ -100,11 +100,26 @@ app.post("/grades", (req, res) => {
                                     console.log(result);
                                     //python script generated output.json
                                     fs.readFile(
-                                        "./output.json",
+                                        "./data_processing/output.json",
                                         "utf8",
                                         (err, jsonString) => {
                                             if (err) res.send(err);
-                                            else res.send(jsonString);
+                                            else {
+                                                fs.readFile(
+                                                    "./data_processing/data.json",
+                                                    "utf8",
+                                                    (err, dataString) => {
+                                                        if (err) res.send(err);
+                                                        else
+                                                            res.send({
+                                                                jsonString:
+                                                                    jsonString,
+                                                                dataString:
+                                                                    dataString,
+                                                            });
+                                                    }
+                                                );
+                                            }
                                         }
                                     );
                                     //

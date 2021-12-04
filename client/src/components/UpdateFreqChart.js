@@ -42,7 +42,7 @@ class UsersOverview extends React.Component {
                     yAxes: [
                         {
                             ticks: {
-                                suggestedMax: 45,
+                                suggestedMax: 35,
                                 callback(tick) {
                                     if (tick === 0) {
                                         return tick;

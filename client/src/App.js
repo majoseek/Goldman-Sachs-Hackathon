@@ -17,7 +17,7 @@ function getQueryVariable(variable) {
     return null;
 }
 function App() {
-    const [dep_grades, set_dep_grades] = useState({});
+    const [dep_grades, set_dep_grades] = useState([]);
     const [project_grades, set_proj_grades] = useState([]);
     useEffect(() => {
         const project_location = getQueryVariable("project_location");
@@ -31,15 +31,43 @@ function App() {
                     project_location: project_location,
                 })
                 .then((response) => {
-                    console.log(response.data.project_grade);
-
-                    for (var key in response.data.project_grade) {
-                        if (response.data.project_grade.hasOwnProperty(key)) {
+                    const obj_dep = JSON.parse(response.data.dataString);
+                    for (var key in obj_dep) {
+                        if (obj_dep.hasOwnProperty(key)) {
+                            const new_elem = {
+                                title: key,
+                                labels: Array.from(
+                                    new Array(6),
+                                    (_, i) => i + 1
+                                ),
+                                datasets: [
+                                    {
+                                        label: "Number of updates",
+                                        fill: "start",
+                                        data: obj_dep[key],
+                                        backgroundColor: "rgba(0,123,255,0.1)",
+                                        borderColor: "rgba(0,123,255,1)",
+                                        pointBackgroundColor: "#ffffff",
+                                        pointHoverBackgroundColor:
+                                            "rgb(0,123,255)",
+                                        borderWidth: 1.5,
+                                        pointRadius: 0,
+                                        pointHoverRadius: 3,
+                                    },
+                                ],
+                            };
+                            set_dep_grades((dep_grades) => [
+                                ...dep_grades,
+                                new_elem,
+                            ]);
+                        }
+                    }
+                    const obj = JSON.parse(response.data.jsonString);
+                    for (var key in obj.project_grade) {
+                        if (obj.project_grade.hasOwnProperty(key)) {
                             const new_elem = {
                                 label: key,
-                                value: response.data.project_grade[
-                                    key
-                                ].toString(),
+                                value: obj.project_grade[key].toString(),
                                 percentage: "2.71%",
                                 increase: true,
                                 chartLabels: [
@@ -77,57 +105,7 @@ function App() {
     }, []);
     return (
         <div>
-            <BlogOverview
-                data_chart={[
-                    {
-                        title: "cos",
-                        labels: Array.from(new Array(12), (_, i) => i + 1),
-                        datasets: [
-                            {
-                                label: "Number of updates",
-                                fill: "start",
-                                data: [
-                                    500, 800, 320, 180, 240, 320, 230, 650, 590,
-                                    1200, 750, 940,
-                                ],
-                                backgroundColor: "rgba(0,123,255,0.1)",
-                                borderColor: "rgba(0,123,255,1)",
-                                pointBackgroundColor: "#ffffff",
-                                pointHoverBackgroundColor: "rgb(0,123,255)",
-                                borderWidth: 1.5,
-                                pointRadius: 0,
-                                pointHoverRadius: 3,
-                            },
-                        ],
-                    },
-                    {
-                        title: "cos2",
-                        labels: Array.from(new Array(30), (_, i) =>
-                            i === 0 ? 1 : i
-                        ),
-                        datasets: [
-                            {
-                                label: "Number of updates",
-                                fill: "start",
-                                data: [
-                                    900, 1000, 320, 580, 740, 820, 530, 150,
-                                    620, 1200, 750, 940, 1420, 1200, 960, 150,
-                                    150, 2800, 2102, 1920, 3920, 5202, 3140,
-                                    2500, 3200, 3200, 3400, 2910, 3100, 4250,
-                                ],
-                                backgroundColor: "rgba(0,123,255,0.1)",
-                                borderColor: "rgba(0,123,255,1)",
-                                pointBackgroundColor: "#ffffff",
-                                pointHoverBackgroundColor: "rgb(0,123,255)",
-                                borderWidth: 1.5,
-                                pointRadius: 0,
-                                pointHoverRadius: 3,
-                            },
-                        ],
-                    },
-                ]}
-                smallStats={project_grades}
-            />
+            <BlogOverview data_chart={dep_grades} smallStats={project_grades} />
         </div>
     );
 }

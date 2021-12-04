@@ -60,36 +60,36 @@ TopReferrals.defaultProps = {
     title: "Worst graded dependencies",
     referralData: [
         {
-            title: "org.cos.tam",
-            value: "19,291",
+            title: "jakarta.annotation-api",
+            value: "1",
         },
         {
-            title: "org.cos.tam.123",
-            value: "11,201",
+            title: "jackson-module-parameter-names",
+            value: "2",
         },
         {
-            title: "org.cos.tam.456",
-            value: "9,291",
+            title: "spring-expression",
+            value: "2",
         },
         {
-            title: "org.cos.tam.51",
-            value: "8,281",
+            title: "jakarta.xml.bind-api",
+            value: "1",
         },
         {
-            title: "cos.elo",
-            value: "7,128",
+            title: "jsonassert",
+            value: "1",
         },
         {
-            title: "elo.123",
-            value: "6,218",
+            title: "xmlunit-core",
+            value: "1",
         },
         {
-            title: "cos.341",
-            value: "1,218",
+            title: "junit-jupiter-api",
+            value: "1",
         },
         {
-            title: "Fasf.512",
-            value: "1,171",
+            title: "opentest4j",
+            value: "1",
         },
     ],
 };
