@@ -70,6 +70,30 @@ def grade_version_count(dependency) -> float:
 
     return grade
 
+
+def grade_update_frequency(dependency) -> float:
+    c = 100
+    timestamps = dependency.timestamps
+
+    diffs = []
+
+    n = len(timestamps)
+
+    for i in range(n - 1):
+        diffs.append(
+            timestamps[i+1] - timestamps[i]
+        )
+
+    grade = 0
+
+    for i in range(n - 1):
+        grade += i / (1 + max(diffs[i] - c, 0))
+
+    grade *= 2 / (n * (n - 1))
+
+    return grade
+
+
 # def grade_update_frequency(dependency) -> float:
 #     version_count = dependency.version_count
 
