@@ -17,7 +17,6 @@ app.post("/grades", (req, res) => {
         res.status(400).send("1Wrong project location");
     else if (!fs.existsSync(project_location))
         res.status(400).send("2Wrong project location");
-    console.log(project_location);
     new Promise((resolve, reject) => {
         //creates dependencyTreeFile
         exec(
