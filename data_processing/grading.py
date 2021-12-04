@@ -3,41 +3,68 @@ import time
 
 WEIGHT_LAST_UPDATE = 0.1
 WEIGHT_UPDATES_FRQUENCY = 0.1
-WEIGHT_VERSION_COUNT = 0.1
+# WEIGHT_VERSION_COUNT = 0.1
 WEIGHTS_SUM = (
     WEIGHT_LAST_UPDATE +
-    WEIGHT_UPDATES_FRQUENCY +
-    WEIGHT_VERSION_COUNT
+    WEIGHT_UPDATES_FRQUENCY
+    # WEIGHT_VERSION_COUNT
 )
+
+GRADES_NAMES = ['overall_grade', 'last_update_grade', 'version_count_grade']
 # WEIGHT_LAST_FREQUENCY = 0.1
 
 
-def grade_project(project_dependencies) -> float:
-    grade = sum(
-        [
-            grade_dependency(dependency)["overall_grade"] for dependency
-            in project_dependencies.dependencies
-        ]
-    )
+def grade_project(project_dependencies) -> dict:
+    dependencies_grades = [
+        grade_dependency(dependency)["overall_grade"] for dependency
+        in project_dependencies.dependencies
+    ]
 
-    return grade
+    deps_number = len(dependencies_grades)
+
+    dictionary = {
+        'project_grade': {
+            'overall_grade': None,
+            'last_update_grade': None,
+            'vesion_count_grade': None
+        },
+        'dependencies_grades': {}
+    }
+
+    # filling dictionary['project_grade']
+    for grade_name in GRADES_NAMES:
+        dictionary['project_grade'][grade_name] = sum(
+            [
+                dependency_grade[grade_name] for dependency_grade
+                in dependencies_grades
+            ]
+        ) / deps_number
+
+    # filling dependencies_dictionary
+    for dependency_grade in dependencies_grades:
+        dependecy_name = dependency_grade.keys()[0]
+        dictionary['dependencies_grades'][dependecy_name] = dependency_grade
+
+    return dictionary
 
 
 def grade_dependency(dependency) -> float:
     last_update_grade = grade_last_update(dependency)
     updates_frequency_grade = grade_updates_frequency(dependency)
-    version_count_grade = grade_version_count(dependency)
+    # version_count_grade = grade_version_count(dependency)
     overall_grade = sum([
         last_update_grade * WEIGHT_LAST_UPDATE,
-        updates_frequency_grade * WEIGHT_UPDATES_FRQUENCY,
-        version_count_grade * WEIGHT_VERSION_COUNT
+        updates_frequency_grade * WEIGHT_UPDATES_FRQUENCY
+        # version_count_grade * WEIGHT_VERSION_COUNT
     ]) / WEIGHTS_SUM
 
     return {
-        "overall_grade": overall_grade,
-        "last_update_grade": last_update_grade,
-        "last_update_grade": last_update_grade,
-        "version_count_grade": version_count_grade
+        dependency.artifact_id: {
+            "overall_grade": overall_grade,
+            "last_update_grade": last_update_grade,
+            "updates_frequency_grade": updates_frequency_grade
+            # "version_count_grade": version_count_grade
+        }
     }
 
 
