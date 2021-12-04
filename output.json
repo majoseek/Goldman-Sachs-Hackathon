@@ -1,1 +1,22 @@
-{"overall_grade": 9, "component_grades": [8, 9, 10]}
+{
+    "project_grade": {
+        "overall_grade": 8,
+        "criterion_A": 8,
+        "criterion_B": 7,
+        "criterion_C": 9
+    }, 
+    "dependencies_grades": {
+        "dependecy_1": {
+            "overall_grade": 8,
+            "criterion_A": 7,
+            "criterion_B": 8,
+            "criterion_C": 9
+        },
+        "dependecy_2": {
+            "overall_grade": 7,
+            "criterion_A": 6,
+            "criterion_B": 7,
+            "criterion_C": 8
+        }
+    }
+}
