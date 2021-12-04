@@ -2,8 +2,13 @@
 import time
 
 WEIGHT_LAST_UPDATE = 0.1
+WEIGHT_UPDATES_FRQUENCY = 0.1
 WEIGHT_VERSION_COUNT = 0.1
-WEIGHTS_SUM = WEIGHT_LAST_UPDATE + WEIGHT_VERSION_COUNT
+WEIGHTS_SUM = (
+    WEIGHT_LAST_UPDATE +
+    WEIGHT_UPDATES_FRQUENCY +
+    WEIGHT_VERSION_COUNT
+)
 # WEIGHT_LAST_FREQUENCY = 0.1
 
 
@@ -20,14 +25,17 @@ def grade_project(project_dependencies) -> float:
 
 def grade_dependency(dependency) -> float:
     last_update_grade = grade_last_update(dependency)
+    updates_frequency_grade = grade_updates_frequency(dependency)
     version_count_grade = grade_version_count(dependency)
     overall_grade = sum([
         last_update_grade * WEIGHT_LAST_UPDATE,
+        updates_frequency_grade * WEIGHT_UPDATES_FRQUENCY,
         version_count_grade * WEIGHT_VERSION_COUNT
     ]) / WEIGHTS_SUM
 
     return {
         "overall_grade": overall_grade,
+        "last_update_grade": last_update_grade,
         "last_update_grade": last_update_grade,
         "version_count_grade": version_count_grade
     }
@@ -71,7 +79,7 @@ def grade_version_count(dependency) -> float:
     return grade
 
 
-def grade_update_frequency(dependency) -> float:
+def grade_updates_frequency(dependency) -> float:
     c = 100
     timestamps = dependency.timestamps
 
@@ -94,7 +102,7 @@ def grade_update_frequency(dependency) -> float:
     return grade
 
 
-# def grade_update_frequency(dependency) -> float:
+# def grade_updates_frequency(dependency) -> float:
 #     version_count = dependency.version_count
 
 #     first_version_timestamp = None
